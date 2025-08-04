@@ -2,7 +2,7 @@
 import { getDetail } from '@/apis/detail';
 import { ref, onMounted } from 'vue'
 import { useRoute } from "vue-router";
-
+import DetailHot from './components/DetailHot.vue';
 const route = useRoute()
 const goods = ref({})
 const getGoods = async () => {
@@ -110,6 +110,12 @@ onMounted(() => {
                                 <div class="goods-detail">
                                     <!-- 属性 -->
                                     <ul class="attrs">
+                                        <!-- 
+                                        错误原因：模板渲染时，goods.details 还未定义（undefined），导致无法读取 properties
+                                        尽管后端确实返回了 properties，但前端在数据加载的时机和初始值处理上有问题，导致渲染时数据还没准备好。
+                                        1.可选链的语法 .?
+                                        2.v-if手动控制渲染时机 保证只有数据存在才渲染
+                                         -->
                                         <li v-for="item in goods.details?.properties" :key="item.value">
                                             <span class="dt">{{item.name}}</span>
                                             <span class="dd">{{item.value}}</span>
@@ -122,7 +128,10 @@ onMounted(() => {
                         </div>
                         <!-- 24热榜+专题推荐 -->
                         <div class="goods-aside">
-
+                            <!-- 24小时 -->
+                            <DetailHot/>
+                            <!-- 周 -->
+                            <DetailHot/>
                         </div>
                     </div>
                 </div>
