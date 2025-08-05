@@ -14,6 +14,7 @@ const getGoods = async () => {
 onMounted(() => {
     getGoods()
 })
+
 </script>
 
 <template>
