@@ -3,7 +3,9 @@ import { getDetail } from '@/apis/detail';
 import { ref, onMounted } from 'vue'
 import { useRoute } from "vue-router";
 import DetailHot from './components/DetailHot.vue';
+import { useCartStore } from '@/stores/cartStore';
 
+const cartStore = useCartStore()
 const route = useRoute()
 const goods = ref({})
 const getGoods = async () => {
@@ -21,6 +23,8 @@ const skuChange = (sku) => {
     console.log(sku);
     skuObj = sku
 }
+
+
 
 //count
 const count = ref(1)
