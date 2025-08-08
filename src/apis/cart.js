@@ -1,4 +1,5 @@
 //封装购物车相关接口
+import httpInstance from '@/utils/http'
 import request from '@/utils/http'
 
 // 加入购物车
@@ -29,4 +30,13 @@ export const delCartAPI = (ids) => {
       ids
     }
   })
+}
+
+// 合并购物车
+export const mergeCartAPI = (data)=>{
+    return httpInstance({
+        url: '/member/cart/merge',
+        method: 'POST',
+        data
+    })
 }
